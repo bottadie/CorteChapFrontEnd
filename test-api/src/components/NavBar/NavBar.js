@@ -17,6 +17,8 @@ return (
       
       <Link to={`/invoices`}> <Nav.Link href="#invoices">Invoices</Nav.Link></Link>
       <Link to={`/orders`}>  <Nav.Link href="#orders">Orders</Nav.Link></Link>
+      <Link to={`/formulario`}>  <Nav.Link href="#orders">Formulario</Nav.Link></Link>
+
     </Nav>
     </Container>
   </Navbar>
