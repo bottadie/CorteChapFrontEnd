@@ -46,13 +46,15 @@ console.log(pokemonInfo)
 <Container>
   <Row>
     <Col>
- 
+    <div className="text-center" style={{ margin: 5 }}>
+
     <form onSubmit= {handleSubmit}>
-      <h1> Our Form </h1>
-      <label htmlFor="title">ID del pokemon</label>
-<textarea onChange= {(e) => setFormData({ body: e.target.value})}  value={formData.body} name="body" id="body"></textarea>
+      <h1> Pokedex</h1>{<br/>}
+      <label htmlFor="title">ID del pokemon</label>{<br/>}
+<textarea onChange= {(e) => setFormData({ body: e.target.value})}  value={formData.body} name="body" id="body"></textarea>{<br/>}{<br/>}
       <input type="submit" value="Submit" />
     </form>
+    </div>
     </Col>
     <Col>
 {
