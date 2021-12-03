@@ -9,7 +9,7 @@ export default function App() {
 
 return (
     <>
-  <Navbar bg="dark" variant="dark">
+  <Navbar  bg="dark" variant="dark">
     <Container>
     <Navbar.Brand href="">Portal CorteChap</Navbar.Brand>
     <Nav className="me-auto">
