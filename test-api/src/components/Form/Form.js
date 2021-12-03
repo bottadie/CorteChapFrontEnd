@@ -1,42 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import ItemP from '../Pokemon/pokeCard'
+import {  Container,Row,Card,Col } from 'react-bootstrap';
 
-import itemP from '../Pokemon/pokeCard'
+
+import PokemonInfoP from '../Pokemon/pokeCard'
+
 
 
 const Form = () => {
 
-  const [formData, setFormData] = useState({
-    title: "",
-    body: ""})
+  const [formData, setFormData] = useState("")
 
-    const [pokemonInfo, setPokemonInfo,] = useState({
-      name:""
-    })
+  const [pokemonInfo, setPokemonInfo,] = useState()
 
 
   
   
   const  handleSubmit = (e) => {
-        e.preventDefault()
-        setFormData({body: e.target[0].value,
-        title: e.target[1].value})
-        console.log(formData.body)
-        console.log("entreAca")
-        console.log(formData.body)
-      BuscoPokemon()}
-   
-    async function BuscoPokemon(){
-      console.log("Entre asyn")
-   const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${formData.body}`).then(response => response.json());
-    console.log(result)
-   // result.map(res => console.log(res.name));
+    e.preventDefault()
+    if (!formData) return;
 
-     console.log(pokemonInfo)
-       
+  async function fetchData() {
+    console.log(formData.body)
+    const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${formData.body}`)
+    const data = await result.json();
+    
+setPokemonInfo(data)
+console.log(pokemonInfo)
+
+  }
+  fetchData()
+  }
      
-    }
-;
+    
+
 
 
 
@@ -45,26 +41,57 @@ const Form = () => {
 
   return (
  <>
+
+
+<Container>
+  <Row>
+    <Col>
+ 
     <form onSubmit= {handleSubmit}>
       <h1> Our Form </h1>
-      <label htmlFor="title">Title</label>
-<input onChange= {(e) => setFormData({title: e.target.value})} value={formData.title} type="text" name="title" id="title" />
-<label htmlFor="body">Body</label>
-<textarea onChange= {(e) => setFormData({...formData, body: e.target.value})}  value={formData.body} name="body" id="body"></textarea>
+      <label htmlFor="title">ID del pokemon</label>
+<textarea onChange= {(e) => setFormData({ body: e.target.value})}  value={formData.body} name="body" id="body"></textarea>
       <input type="submit" value="Submit" />
     </form>
+    </Col>
+    <Col>
+{
+pokemonInfo && 
+<Card style={{ margin: 5 }}>
+<div className="text-center" key={pokemonInfo.id}>
+<h1>{pokemonInfo.name}</h1>
+
+<h4>
+  Altura: {pokemonInfo.height} | Peso: {pokemonInfo.weight}
+</h4>
+
+<img alt="pokemon" src={`${pokemonInfo.sprites.front_shiny}`} />
+
+
+<ul>
+{<br/>}
+<h2>Habilidades</h2>
+{pokemonInfo && pokemonInfo.abilities.map((pokemon,e) => {
+  return   <h4> {pokemon.ability.name}</h4>
     
- 
-    
-    {/* {pokemonInfo.length > 0 ?    
-         <div>
-                  <ItemP detallesdeitems={pokemonInfo.name}/>
-                   
-                   </div>
-                  
-                   :
-           "Cargando..."}
-     */}
+  
+
+
+})
+
+
+}
+
+</ul>
+
+
+</div>
+</Card>}
+</Col>
+ </Row>
+ </Container>
+
+
      </>
   
 
