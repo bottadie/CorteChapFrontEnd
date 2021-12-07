@@ -5,6 +5,14 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/
 import { loginRequest } from "./authConfig";
 
 
+// Archivos importados para páginas personalizadas
+ import NavBar from './components/NavBar/NavBar';
+ import {BrowserRouter,Route,Routes} from 'react-router-dom'
+ import InvoiceDetail from './components/Invoices/InvoiceDetail'
+ import Form from './components/Form/Form'
+
+
+
 const Home = () => {
     const { instance } = useMsal();
     const { accounts } = useMsal();
@@ -30,7 +38,20 @@ const Home = () => {
 
             <AuthenticatedTemplate>
   
-                <div className="App">
+
+                <BrowserRouter>
+   <NavBar instance={instance} />
+<Routes>
+<Route path="/" element={<h1 style={{textAlign: 'center',  margin: 50}}>Gestión de clientes</h1>} />
+
+    <Route path='/invoices' element={<InvoiceDetail/>}/>
+    <Route path='/formulario' element={<Form/>}/>
+   
+   
+</Routes>
+    </BrowserRouter>
+  
+                {/* <div className="App">
                     <header className="App-header">
                         <img src={logo} className="App-logo" alt="logo" />
                         
@@ -51,10 +72,11 @@ const Home = () => {
                             Logout
                         </button>
                     </header>
-                </div>
+                </div> */}
             </AuthenticatedTemplate>
         </>
     )
 }
 
+ 
 export default Home;
